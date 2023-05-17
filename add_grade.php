@@ -3,7 +3,7 @@ session_start();
 
 // Check if user is logged in and has teacher role
 if (!isset($_SESSION['user_id']) || $_SESSION['acct_type'] != 'teacher') {
-    header('Location: login.php');
+    header('Location: index.php');
     exit;
 }
 
@@ -38,16 +38,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Get the grade from the form
         $grade = $_POST['grade'];
 
-        // Validate the grade (add your own validation logic if needed)
-
-        // Update the grade in the grades table for the specific student and subject
-        $update_grade = "UPDATE grades SET grade=$grade WHERE sid=$student_id AND sbid=" . $teacher['sbid'];
-        if (mysqli_query($conn, $update_grade)) {
-            // Redirect back to the teacher's page
-            header('Location: teacher.php');
-            exit;
+        // Validate the grade (ensure it is a number)
+        if (!is_numeric($grade)) {
+            $error = "Please enter a valid grade.";
         } else {
-            $error = "Error updating grade: " . mysqli_error($conn);
+            // Update the grade in the grades table for the specific student and subject
+            $update_grade = "UPDATE grades SET grade=$grade WHERE sid=$student_id AND sbid=" . $teacher['sbid'];
+            if (mysqli_query($conn, $update_grade)) {
+                // Redirect back to the teacher's page
+                header('Location: teacher.php');
+                exit;
+            } else {
+                $error = "Error updating grade: " . mysqli_error($conn);
+            }
         }
     }
 }

@@ -3,7 +3,7 @@ session_start();
 
 // Check if user is logged in and has student role
 if (!isset($_SESSION['user_id']) || $_SESSION['acct_type'] != 'student') {
-    header('Location: login.php');
+    header('Location: index.php');
     exit;
 }
 

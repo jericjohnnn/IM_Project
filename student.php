@@ -4,7 +4,7 @@ session_start();
 
 // Check if user is logged in and has student role
 if (!isset($_SESSION['user_id']) || $_SESSION['acct_type'] != 'student') {
-    header('Location: login.php');
+    header('Location: index.php');
     exit;
 }
 
@@ -54,23 +54,9 @@ mysqli_close($conn);
 <a href="logout.php">Logout</a>
 
 
+<?php
+    include 'addsub.php';
 
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Select Subject</title>
-</head>
-<body>
-    <h1>add Subject</h1>
-    <form method="post" action="addsub.php">
-        <label>Subject Code:</label>
-        <input type="text" name="subject_code">
-        <br>
-        <input type="submit" name="submit" value="Select Subject">
-    </form>
-</body>
-</html>
-
+?>
 
 

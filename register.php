@@ -1,22 +1,4 @@
-<?php
-    session_start();
-
-    // check if a session is active
-    if (isset($_SESSION['acct_type'])) {
-        // redirect the user to the appropriate page based on their role
-        if ($_SESSION['acct_type'] == 'student') {
-            header('Location: student.php');
-            exit();
-        } else if ($_SESSION['acct_type'] == 'teacher') {
-            header('Location: teacher.php');
-            exit();
-        }
-    }
-
-    // if no session is active, continue with the current page
-?>
-
-
+<!-- registration form -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,7 +61,7 @@
 		<input type="submit" name="submit" value="Register">
 	</form>
 
-    <a href="login.php">login</a>
+    <a href="index.php">login</a>
 
     <!-- script for the student/teacher selection -->
 	<script>
@@ -99,6 +81,27 @@
 </body>
 </html>
 
+
+<!-- code for: if already logged in, will be redirected to respective page -->
+<?php
+    session_start();
+
+    // check if a session is active
+    if (isset($_SESSION['acct_type'])) {
+        // redirect the user to the appropriate page based on their role
+        if ($_SESSION['acct_type'] == 'student') {
+            header('Location: student.php');
+            exit();
+        } else if ($_SESSION['acct_type'] == 'teacher') {
+            header('Location: teacher.php');
+            exit();
+        }
+    }
+
+    // if no session is active, continue with the current page
+?>
+
+<!-- registration php code -->
 <?php
 	// connect to database im_project
 	include 'dbconnect.php';

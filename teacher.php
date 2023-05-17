@@ -3,7 +3,7 @@ session_start();
 
 // Check if user is logged in and has teacher role
 if (!isset($_SESSION['user_id']) || $_SESSION['acct_type'] != 'teacher') {
-    header('Location: login.php');
+    header('Location: index.php');
     exit;
 }
 
@@ -45,7 +45,6 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo '<td>' . $row['firstname'] . '</td>';
     echo '<td>' . $row['lastname'] . '</td>';
     echo '<td>' . $row['course'] . '</td>';
-    echo '<td><a href="edit_grade.php?student_id=' . $row['sid'] . '">Edit</a></td>';
     echo '<td><a href="add_grade.php?student_id=' . $row['sid'] . '">Give Grade</a></td>';
     echo '<td>' . $row['grade'] . '</td>';
     echo '</tr>';

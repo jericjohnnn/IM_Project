@@ -1,7 +1,24 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Subject</title>
+</head>
+<body>
+    <h1>add Subject</h1>
+    <form method="post" action="">
+        <label>Subject Code:</label>
+        <input type="text" name="subject_code">
+        <br>
+        <input type="submit" name="submit" value="Select Subject">
+    </form>
+</body>
+</html>
+
 <?php
 
-// Start a session
-session_start();
+
 
 $user_id = $_SESSION['user_id'];
 
@@ -33,13 +50,21 @@ if (isset($_POST['submit'])) {
             $row = mysqli_fetch_assoc($result);
             $sid = $row['sid'];
 
+            // Check if the student is already enrolled in the subject
+            $check_enrollment = "SELECT gid FROM grades WHERE sid = '$sid' AND sbid = '$sbid'";
+            $result = mysqli_query($conn, $check_enrollment);
 
-            // Insert the sid and sbid into the grades table
-            $insert_grade = "INSERT INTO grades (sid, sbid) VALUES ('$sid', '$sbid')";
-            if (mysqli_query($conn, $insert_grade)) {
-                header('Location: student.php');
+            if (mysqli_num_rows($result) == 0) {
+                // Student is not enrolled, insert the sid and sbid into the grades table
+                $insert_grade = "INSERT INTO grades (sid, sbid) VALUES ('$sid', '$sbid')";
+                if (mysqli_query($conn, $insert_grade)) {
+                    header('Location: student.php');
+                } else {
+                    echo "Error inserting subject code into grades table: " . mysqli_error($conn);
+                }
             } else {
-                echo "Error inserting subject code into grades table: " . mysqli_error($conn);
+                // header('Location: student.php');
+                echo "You are already enrolled in this subject.";
             }
         } else {
             echo "User ID not found in students table.";
