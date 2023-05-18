@@ -3,6 +3,7 @@
 <html>
 <head>
 	<title>Registration Form</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
 
 </head>
 <body>

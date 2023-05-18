@@ -1,3 +1,6 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+
 <?php
 session_start();
 
@@ -45,7 +48,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo '<td>' . $row['firstname'] . '</td>';
     echo '<td>' . $row['lastname'] . '</td>';
     echo '<td>' . $row['course'] . '</td>';
-    echo '<td><a href="add_grade.php?student_id=' . $row['sid'] . '">Give Grade</a></td>';
+    echo '<td><a id="noticeBtn" href="add_grade.php?student_id=' . $row['sid'] . '">Give Grade</a></td>';
     echo '<td>' . $row['grade'] . '</td>';
     echo '</tr>';
     $counter++;
@@ -58,3 +61,12 @@ mysqli_close($conn);
 ?>
 
 <a href="logout.php">Logout</a>
+
+
+<script>
+        $(document).ready(function() {
+            $('#noticeBtn').click(function() {
+                window.open('add_grade.php', '_blank', 'width=500,height=500');
+            });
+        });
+    </script>

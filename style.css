@@ -1,0 +1,126 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+p {
+    color: #666;
+}
+
+a {
+    color: #337ab7;
+    text-decoration: none;
+}
+
+/* Login form styles */
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: inline-block;
+    width: 100px;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 5px;
+    width: 200px;
+}
+
+input[type="submit"] {
+    padding: 8px 16px;
+    background-color: #337ab7;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+/* Registration form styles */
+select {
+    padding: 5px;
+    width: 220px;
+}
+
+#course_field,
+#subject_field {
+    margin-top: 10px;
+}
+
+/* Add Grade form styles */
+form[name="grade_form"] {
+    margin-top: 20px;
+}
+
+/* Student Page styles */
+.student-info {
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.student-info h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.student-info table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.student-info th,
+.student-info td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.student-info th {
+    background-color: #f5f5f5;
+}
+
+.student-info td.grade {
+    font-weight: bold;
+}
+
+/* Teacher Page styles */
+.teacher-info {
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.teacher-info h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.teacher-info table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.teacher-info th,
+.teacher-info td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.teacher-info th {
+    background-color: #f5f5f5;
+}
+
+/* Error message styles */
+.error {
+    color: #ff0000;
+    margin-bottom: 10px;
+}

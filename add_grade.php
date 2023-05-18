@@ -67,6 +67,8 @@ $student_grade = mysqli_fetch_assoc($result);
 <html>
 <head>
     <title>Add Grade</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
 </head>
 <body>
     <h1>Add Grade</h1>
