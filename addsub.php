@@ -1,27 +1,5 @@
 
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Select Subject</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-
-</head>
-<body>
-    <h1>add Subject</h1>
-    <form method="post" action="">
-        <label>Subject Code:</label>
-        <input type="text" name="subject_code">
-        <br>
-        <input type="submit" name="submit" value="Select Subject">
-    </form>
-</body>
-</html>
-
 <?php
-
-
-
 $user_id = $_SESSION['user_id'];
 
 // Connect to the database
@@ -76,5 +54,23 @@ if (isset($_POST['submit'])) {
     }
 }
 
-
 ?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Subject</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+    <h1>add Subject</h1>
+    <form method="post" action="">
+        <label>Subject Code:</label>
+        <input type="text" name="subject_code">
+        <br>
+        <input type="submit" name="submit" value="Select Subject">
+    </form>
+</body>
+</html>

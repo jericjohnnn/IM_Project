@@ -1,3 +1,79 @@
+
+<!-- code for: if already logged in, will be redirected to respective page -->
+<?php
+    session_start();
+
+    // check if a session is active
+    if (isset($_SESSION['acct_type'])) {
+        // redirect the user to the appropriate page based on their role
+        if ($_SESSION['acct_type'] == 'student') {
+            header('Location: student.php');
+            exit();
+        } else if ($_SESSION['acct_type'] == 'teacher') {
+            header('Location: teacher.php');
+            exit();
+        }
+    }
+
+    // if no session is active, continue with the current page
+?>
+
+<!-- registration php code -->
+<?php
+	// connect to database im_project
+	include 'dbconnect.php';
+
+	// check if the form is submitted
+	if(isset($_POST['submit'])) {
+		// get the form inputs
+		$firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
+		$lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
+		$username = mysqli_real_escape_string($conn, $_POST['username']);
+		$password = mysqli_real_escape_string($conn, $_POST['password']);
+		$acct_type = mysqli_real_escape_string($conn, $_POST['acct_type']);
+
+		// check if the username already exists in the users table
+		$check_user = "SELECT * FROM users WHERE username='$username'";
+		$result = mysqli_query($conn, $check_user);
+
+		if(mysqli_num_rows($result) == true) {
+			// username already exists, redirect back to registration page
+			echo 'Username already exists. Please choose a different username.';
+			exit;
+		} else {
+			// insert the user information into the users table
+			$insert_user = "INSERT INTO users (username, password, acct_type) VALUES ('$username', '$password', '$acct_type')";
+			mysqli_query($conn, $insert_user);
+			$user_id = mysqli_insert_id($conn);
+
+			// check if the account type is student or teacher
+			if($acct_type == 'student') {
+				// get the course from the form input
+				$course = mysqli_real_escape_string($conn, $_POST['course']);
+
+				// insert the student information into the students table
+				$insert_student = "INSERT INTO students (uid, firstname, lastname, course) VALUES ('$user_id', '$firstname', '$lastname', '$course')";
+				mysqli_query($conn, $insert_student);
+			} elseif($acct_type == 'teacher') {
+				// get the subject ID from the form input
+				$subject_id = mysqli_real_escape_string($conn, $_POST['subject']);
+
+				// insert the teacher information into the teachers table
+				$insert_teacher = "INSERT INTO teachers (uid, firstname, lastname, sbid) VALUES ('$user_id', '$firstname', '$lastname', '$subject_id')";
+				mysqli_query($conn, $insert_teacher);
+			}
+
+			// redirect to the home page after registration
+			echo 'register success';
+			exit;
+		}
+	}
+
+	// close the database connection
+	mysqli_close($conn);
+?>
+
+
 <!-- registration form -->
 <!DOCTYPE html>
 <html>
@@ -81,79 +157,3 @@
 	</script>
 </body>
 </html>
-
-
-<!-- code for: if already logged in, will be redirected to respective page -->
-<?php
-    session_start();
-
-    // check if a session is active
-    if (isset($_SESSION['acct_type'])) {
-        // redirect the user to the appropriate page based on their role
-        if ($_SESSION['acct_type'] == 'student') {
-            header('Location: student.php');
-            exit();
-        } else if ($_SESSION['acct_type'] == 'teacher') {
-            header('Location: teacher.php');
-            exit();
-        }
-    }
-
-    // if no session is active, continue with the current page
-?>
-
-<!-- registration php code -->
-<?php
-	// connect to database im_project
-	include 'dbconnect.php';
-
-	// check if the form is submitted
-	if(isset($_POST['submit'])) {
-		// get the form inputs
-		$firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
-		$lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
-		$username = mysqli_real_escape_string($conn, $_POST['username']);
-		$password = mysqli_real_escape_string($conn, $_POST['password']);
-		$acct_type = mysqli_real_escape_string($conn, $_POST['acct_type']);
-
-		// check if the username already exists in the users table
-		$check_user = "SELECT * FROM users WHERE username='$username'";
-		$result = mysqli_query($conn, $check_user);
-
-		if(mysqli_num_rows($result) == true) {
-			// username already exists, redirect back to registration page
-			echo 'Username already exists. Please choose a different username.';
-			exit;
-		} else {
-			// insert the user information into the users table
-			$insert_user = "INSERT INTO users (username, password, acct_type) VALUES ('$username', '$password', '$acct_type')";
-			mysqli_query($conn, $insert_user);
-			$user_id = mysqli_insert_id($conn);
-
-			// check if the account type is student or teacher
-			if($acct_type == 'student') {
-				// get the course from the form input
-				$course = mysqli_real_escape_string($conn, $_POST['course']);
-
-				// insert the student information into the students table
-				$insert_student = "INSERT INTO students (uid, firstname, lastname, course) VALUES ('$user_id', '$firstname', '$lastname', '$course')";
-				mysqli_query($conn, $insert_student);
-			} elseif($acct_type == 'teacher') {
-				// get the subject ID from the form input
-				$subject_id = mysqli_real_escape_string($conn, $_POST['subject']);
-
-				// insert the teacher information into the teachers table
-				$insert_teacher = "INSERT INTO teachers (uid, firstname, lastname, sbid) VALUES ('$user_id', '$firstname', '$lastname', '$subject_id')";
-				mysqli_query($conn, $insert_teacher);
-			}
-
-			// redirect to the home page after registration
-			echo 'register success';
-			exit;
-		}
-	}
-
-	// close the database connection
-	mysqli_close($conn);
-?>
-

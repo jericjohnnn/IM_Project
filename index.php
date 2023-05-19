@@ -1,28 +1,3 @@
-<!-- display of log in form -->
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Home</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
-
-</head>
-<body>
-	<h2>Login</h2>
-	<form method="post" action="">
-		<label>Username:</label>
-		<input type="text" name="username"><br><br>
-
-		<label>Password:</label>
-		<input type="password" name="password"><br><br>
-
-		<input type="submit" name="submit" value="Login">
-	</form>
-
-    <a href="register.php">Sign Up</a>
-    <!-- <a href="logout.php">logout</a> -->
-</body>
-</html>
-
 
 <!-- code for log in to function -->
 <?php
@@ -82,3 +57,29 @@
     }
     // if no session is active, continue with the current page
 ?>
+
+<!-- display of log in form -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+	<h2>Login</h2>
+	<form method="post" action="">
+		<label>Username:</label>
+		<input type="text" name="username"><br><br>
+
+		<label>Password:</label>
+		<input type="password" name="password"><br><br>
+
+		<input type="submit" name="submit" value="Login">
+	</form>
+
+    <a href="register.php">Sign Up</a>
+    <!-- <a href="logout.php">logout</a> -->
+</body>
+</html>
+
