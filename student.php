@@ -31,8 +31,6 @@ $query = "SELECT grades.gid, grades.grade, subjects.subject, subjects.subject_na
 // Execute the query
 $result = mysqli_query($conn, $query);
 
-// Check if there are any rows in the result
-if (mysqli_num_rows($result) > 0) {
     // Start the HTML table
     echo "<table><tr><th>Grade</th><th>Subject</th><th>Subject Description</th><th>Action</th></tr>";
 
@@ -44,9 +42,7 @@ if (mysqli_num_rows($result) > 0) {
 
     // End the HTML table
     echo "</table>";
-} else {
-    echo "No results found.";
-}
+
 
 // Close the database connection
 mysqli_close($conn);

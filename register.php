@@ -39,7 +39,7 @@
 		if(mysqli_num_rows($result) == true) {
 			// username already exists, redirect back to registration page
 			echo 'Username already exists. Please choose a different username.';
-			exit;
+			// exit;
 		} else {
 			// insert the user information into the users table
 			$insert_user = "INSERT INTO users (username, password, acct_type) VALUES ('$username', '$password', '$acct_type')";
@@ -65,7 +65,6 @@
 
 			// redirect to the home page after registration
 			echo 'register success';
-			exit;
 		}
 	}
 
